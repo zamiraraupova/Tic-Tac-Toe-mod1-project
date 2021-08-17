@@ -39,7 +39,6 @@ function changePlayer() {              // strictly eaqul to X
 console.log(changePlayer)
 
 
-
 function results() {
   let winner = false;
   for (let i = 0; i <= 7; i++) {
@@ -48,7 +47,14 @@ function results() {
       let b = board[win[1]];
       let c = board[win[2]];
       if (a === '' || b === '' || c === '') {
-    
+          continue;
+      }
+      if (a === b && b === c) {
+          winner = true;
+          break
+      }
+  }
+
   
 
 
@@ -72,6 +78,7 @@ function restart() {
   display.innerHTML = whoseTurn();
   document.querySelectorAll(".block").forEach(block => block.innerHTML = "");
 }
+
 
 
 
