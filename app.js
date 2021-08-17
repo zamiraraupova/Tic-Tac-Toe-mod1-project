@@ -28,15 +28,6 @@ function blockPlay(blck, blckIndex) {  //showing if the block was clicked and pl
     blck.innerHTML = currentPlayer;
 }
 
-function changePlayer() {              // strictly eaqul to X 
-     if(currentPlayer === "X") {       // if equal to O / else X
-        currentPlayer === "O"
-    } else {
-        currentPlayer === "X"
-    }  
-    display.innerHTML = whoseTurn();
-}
-console.log(changePlayer)
 
 
 function results() {
@@ -54,7 +45,11 @@ function results() {
           break
       }
   }
-
+  if (winner) {
+    display.innerHTML = winMessage();
+    playGame = false;
+    return;
+}
   
 
 
