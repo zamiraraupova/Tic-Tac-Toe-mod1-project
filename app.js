@@ -5,7 +5,7 @@ let playGame = true; // this is needed for pause if game ended
 let currentPlayer = "X"; // player X will start the game
 let board = ["", "", "", "", "", "", "", "", ""]; // array of the board to pick the index for clicks
 
-//display messages of who will win/tie/turn
+//show messages of who will win/tie/turn
 const winMsg = () => `Player ${currentPlayer} has won!`;
 const tieMsg = () => `It is a tie!`;
 const whoseTurn = () => `It's ${currentPlayer}'s turn`;
@@ -28,7 +28,10 @@ function blockPlay(blck, blckIndex) {  //showing if the block was clicked and pl
     blck.innerHTML = currentPlayer;
 }
 
-
+function changePlayer() {          //player move
+  currentPlayer = currentPlayer === "X" ? "O" : "X"; // if O ... else X
+  display.innerHTML = whoseTurn();
+}
 
 function results() {
   let winner = false;
@@ -56,7 +59,8 @@ if (tie) {
     playGame = false;
     return;
 }
-
+changePlayer();
+}
 
 
 function blockClick(clickedBlock) { // clicking the cell
