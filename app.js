@@ -1,7 +1,7 @@
 // connecting html to js
 const display = document.querySelector('.message');
 
-
+let playGame = true; // this is needed for pause if game ended
 let currentPlayer = "X"; // player X will start the game
 let board = ["", "", "", "", "", "", "", "", ""]; // array of the board to pick the index for clicks
 
@@ -12,9 +12,9 @@ const whoseTurn = () => `It's ${currentPlayer}'s turn`;
 
 display.innerHTML = whoseTurn();
 
-const whoWin = [
-    [0, 1, 2],
-    [3, 4, 5],
+const whoWin = [      // [0 1 2]
+    [0, 1, 2],        // [3 4 5]
+    [3, 4, 5],        // [6 7 8] 
     [6, 7, 8],
     [0, 3, 6],
     [1, 4, 7],
@@ -23,12 +23,22 @@ const whoWin = [
     [2, 4, 6]
 ];
 
-function blockClicked(blck, blckIndex) {  //showing if the block was clicked and played by the current player
+function blockPlay(blck, blckIndex) {  //showing if the block was clicked and played by the current player
     board[blckIndex] = currentPlayer;   // block index from 0 to 8
     blck.innerHTML = currentPlayer;
 }
 
+function blockClick(clickedBlock) { // clicking the cell
+  const clickedBlck = clickedBlock.target;
+  const clickedBlockIndex = parseInt(clickedBlck.getAttribute("index")); // using index from html to know there it is on the board
+                // using parseInt - sinse getAttribute gets the string, and it's needed a number
+  if (board[clickedBlockIndex] !== "" || !playGame) { // if the game stoped, no more clicks
+      return;
+  }
 
+    blockPlay(blck, blckIndex);
+    results(); // if the game is still on  ----> results
+}
 
 
 
@@ -49,7 +59,9 @@ console.log(changePlayer)
 
 
 
-
+document.querySelectorAll('.block').forEach(block => block.addEventListener("click", cellClick));
+document.querySelector('.restart').addEventListener("click", restart);
+ 
 
 // function equals3(a,b,c){
 //   return (a==b && b==c && a != "");
