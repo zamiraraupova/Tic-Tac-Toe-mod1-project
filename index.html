@@ -9,31 +9,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Tic-Tac-Toe</h1>
-    </header>
-    <div class="container">
-            
-        <div class="play-area">
-              <div class="block" id="block_0" ></div>
-              <div class="block" id="block_1" ></div>
-              <div class="block" id="block_2" ></div>
-              <div class="block" id="block_3" ></div>
-              <div class="block" id="block_4" ></div>
-              <div class="block" id="block_5" ></div>
-              <div class="block" id="block_6" ></div>
-              <div class="block" id="block_7" ></div>
-              <div class="block" id="block_8" ></div>
+    <section>
+        <h1 class="title">Tic-Tac-Toe</h1>
+        <div class="container">
+            <div class="block" index="0" ></div>
+            <div class="block" index="1" ></div>
+            <div class="block" index="2" ></div>
+            <div class="block" index="3" ></div>
+            <div class="block" index="4" ></div>
+            <div class="block" index="5" ></div>
+            <div class="block" index="6" ></div>
+            <div class="block" index="7" ></div>
+            <div class="block" index="8" ></div>
         </div>
-    </div>
-
-
-     <div>     
-        <h2 class="status"></h2>
-        <button onclick="reset()">RESET</button>
-    </div>
-
-
+        <div class="message"></div>
+        <button class="restart">Restart Game</button>
+    </section>
 
     <script src="app.js"></script>
 </body>
