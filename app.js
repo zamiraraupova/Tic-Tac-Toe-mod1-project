@@ -50,7 +50,13 @@ function results() {
     playGame = false;
     return;
 }
-  
+let tie = !board.includes("");
+if (tie) {
+    display.innerHTML = tieMessage();
+    playGame = false;
+    return;
+}
+
 
 
 function blockClick(clickedBlock) { // clicking the cell
