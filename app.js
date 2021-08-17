@@ -28,6 +28,30 @@ function blockPlay(blck, blckIndex) {  //showing if the block was clicked and pl
     blck.innerHTML = currentPlayer;
 }
 
+function changePlayer() {              // strictly eaqul to X 
+     if(currentPlayer === "X") {       // if equal to O / else X
+        currentPlayer === "O"
+    } else {
+        currentPlayer === "X"
+    }  
+    display.innerHTML = whoseTurn();
+}
+console.log(changePlayer)
+
+
+
+function results() {
+  let winner = false;
+  for (let i = 0; i <= 7; i++) {
+      const win = whoWin[i];
+      let a = board[win[0]];
+      let b = board[win[1]];
+      let c = board[win[2]];
+      if (a === '' || b === '' || c === '') {
+    
+  
+
+
 function blockClick(clickedBlock) { // clicking the cell
   const clickedBlck = clickedBlock.target;
   const clickedBlockIndex = parseInt(clickedBlck.getAttribute("index")); // using index from html to know there it is on the board
@@ -41,16 +65,14 @@ function blockClick(clickedBlock) { // clicking the cell
 }
 
 
-
-function changePlayer() {              // strictly eaqul to X 
-     if(currentPlayer === "X") {       // if equal to O / else X
-        currentPlayer === "O"
-    } else {
-        currentPlayer === "X"
-    }  
-    display.innerHTML = whoseTurn();
+function restart() {
+  playGame = true;
+  currentPlayer = "X";
+  board = ["", "", "", "", "", "", "", "", ""];
+  display.innerHTML = whoseTurn();
+  document.querySelectorAll(".block").forEach(block => block.innerHTML = "");
 }
-console.log(changePlayer)
+
 
 
 
@@ -70,23 +92,23 @@ document.querySelector('.restart').addEventListener("click", restart);
 //     let winner = null;
 // //rows
 //     for(let i = 0; i < 3; i++) {
-//         if(equals3(playBoard[i][0],playBoard[i][1],playBoard[i][2])) {
-//            winner = playBoard[i][0];     
+//         if(equals3(board[i][0],board[i][1],board[i][2])) {
+//            winner = board[i][0];     
 //         }
 //     }
 //     //colums
 //     for(let i = 0; i < 3; i++) {
-//         if(equals3(playBoard[0][i],playBoard[0][i],playBoard[0][i])) {
-//            winner = playBoard[0][i];     
+//         if(equals3(board[0][i],board[0][i],board[0][i])) {
+//            winner = board[0][i];     
 //         }
 //     }
 //     //dioganals
-//         if(equals3(playBoard[0][0],playBoard[1][1],playBoard[2][2])) {
-//            winner = playBoard[0][0];   //??  
+//         if(equals3(board[0][0],board[1][1],board[2][2])) {
+//            winner = board[0][0];   //??  
 //         }
         
-//         if(equals3(playBoard[0][2],playBoard[1][1],playBoard[2][0])) {
-//             winner = playBoard[2][0];  // ??   
+//         if(equals3(board[0][2],board[1][1],board[2][0])) {
+//             winner = board[2][0];  // ??   
 //         }
 //     if (winner == null) {
 //         return "It is a tie";
