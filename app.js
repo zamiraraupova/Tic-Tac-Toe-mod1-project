@@ -1,21 +1,16 @@
 // connecting html to js
-const display = document.querySelector('.message');
+const display = document.querySelector('.message'); //will show the message whose turn is and who will win/lose
+document.querySelectorAll('.block').forEach(block => block.addEventListener('click', blockClick));
+document.querySelector('.restart').addEventListener('click', restart);
 
 let playGame = true; // this is needed for pause if game ended
 let currentPlayer = "X"; // player X will start the game
 let board = ["", "", "", "", "", "", "", "", ""]; // array of the board to pick the index for clicks
 
-//show messages of who will win/tie/turn
-const winMsg = () => `Player ${currentPlayer} has won!`;
-const tieMsg = () => `It is a tie!`;
-const whoseTurn = () => `It's ${currentPlayer}'s turn`;
-
-display.innerHTML = whoseTurn();
-
-const whoWin = [      // [0 1 2]
-    [0, 1, 2],        // [3 4 5]
-    [3, 4, 5],        // [6 7 8] 
-    [6, 7, 8],
+const whoWin = [      
+    [0, 1, 2],        // [1 2 3]
+    [3, 4, 5],        // [4 5 6] 
+    [6, 7, 8],        // [7 8 9] 
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
@@ -23,79 +18,52 @@ const whoWin = [      // [0 1 2]
     [2, 4, 6]
 ];
 
-function blockPlay(blck, blckIndex) {  //showing if the block was clicked and played by the current player
-    board[blckIndex] = currentPlayer;   // block index from 0 to 8
-    blck.innerHTML = currentPlayer;
+function blockPlayed(clickedBlock, clickedBlockIndex) {
+    board[clickedBlockIndex] = currentPlayer;
+    clickedBlock.innerHTML = currentPlayer;
 }
 
-function changePlayer() {          //player move
-  currentPlayer = currentPlayer === "X" ? "O" : "X"; // if O ... else X
-  display.innerHTML = whoseTurn();
+function changePlayer() {
+  currentPlayer = currentPlayer === "X" ? "O" : "X";
+  display.innerHTML = `It's ${currentPlayer}'s turn`;
 }
 
 function results() {
-  let winner = false;
-  for (let i = 0; i <= 7; i++) {
-      const win = whoWin[i];
-      let a = board[win[0]];
-      let b = board[win[1]];
-      let c = board[win[2]];
-      if (a === '' || b === '' || c === '') {
-          continue;
-      }
-      if (a === b && b === c) {
-          winner = true;
-          break
-      }
-  }
-  if (winner) {
-    display.innerHTML = winMessage();
-    playGame = false;
-    return;
-}
-let tie = !board.includes("");
-if (tie) {
-    display.innerHTML = tieMessage();
-    playGame = false;
-    return;
-}
-changePlayer();
-}
+    let winner = false;
+    for (let i = 0; i <= 7; i++) {
+        const win = whoWin[i];
+        let a = board[win[0]];
+        let b = board[win[1]];
+        let c = board[win[2]];
+        
+        if (a === '' || b === '' || c === '') {
+            continue;
+        }
+        if (a === b && b === c) {
+            winner = true;
+            break
+        }
+    }
 
+    if (winner) {
+        display.innerHTML = `Player ${currentPlayer} has won!`;
+        playGame = false;
+        return;
+    }
 
-function blockClick(clickedBlock) { // clicking the cell
-  const clickedBlck = clickedBlock.target;
-  const clickedBlockIndex = parseInt(clickedBlck.getAttribute("index")); // using index from html to know there it is on the board
-                // using parseInt - sinse getAttribute gets the string, and it's needed a number
-  if (board[clickedBlockIndex] !== "" || !playGame) { // if the game stoped, no more clicks
-      return;
-  }
+    let tie = !board.includes("");
+    if (tie) {
+        display.innerHTML = `It is a tie!`;
+        playGame = false;
+        return;
+    }
 
-    blockPlay(blck, blckIndex);
-    results(); // if the game is still on  ----> results
-}
-
-
-function restart() {
-  playGame = true;
-  currentPlayer = "X";
-  board = ["", "", "", "", "", "", "", "", ""];
-  display.innerHTML = whoseTurn();
-  document.querySelectorAll(".block").forEach(block => block.innerHTML = "");
+    changePlayer();
 }
 
 
 
 
-
-
-
-
-
-
-document.querySelectorAll('.block').forEach(block => block.addEventListener("click", cellClick));
-document.querySelector('.restart').addEventListener("click", restart);
- 
 
 // function equals3(a,b,c){
 //   return (a==b && b==c && a != "");
