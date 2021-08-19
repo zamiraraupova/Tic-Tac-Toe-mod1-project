@@ -19,13 +19,15 @@ const whoWin = [
   [2, 4, 6]
 ];
 
-function blockPlayed(clickedBlock, clickedBlockIndex) {
-  console.log(clickedBlock, clickedBlockIndex)
+function blockPlayed(clickedBlock, clickedBlockIndex) {   
+  if (playGame) {                                       //if the game still active, you can put "" is 
+    console.log(clickedBlock, clickedBlockIndex)
   board[clickedBlockIndex] = currentPlayer;
   clickedBlock.innerHTML = currentPlayer;
+  results()
   changePlayer()
+  }
 }
-
 
 function changePlayer() {
   currentPlayer = currentPlayer === "X" ? "O" : "X";
@@ -50,6 +52,7 @@ function results() {
   }
 
   if (winner) {
+    console.log(currentPlayer)
     display.innerHTML = `Player ${currentPlayer} has won!`;
     playGame = false;
     return;
@@ -62,7 +65,6 @@ function results() {
     return;
   }
 
-  changePlayer();
 }
 
 
