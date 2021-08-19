@@ -1,13 +1,15 @@
 // connecting html to js
 const display = document.querySelector('.message'); //will show the message whose turn is and who will win/lose
-let board = ["", "", "", "", "", "", "", "", ""]; // array of the board to pick the index for clicks
+let board = ["", "", "", "", "", "", "", "", ""]; // //the form of empty strings in an array will allow to easily track played cells and validate the game state later on
 
 let playGame = true; // this is needed for pause if game ended //if game is still active
-let currentPlayer = "X"; // player X will start the game
+let currentPlayer = "X"; // player X will start the game and to know whose turn is
 
-document.querySelectorAll('.block').forEach((block, index) => block.addEventListener('click', () => blockPlayed(block,index)));
+//forEach - allows to grab all the blocks and be able to click on each one and it sends it to rhe blockPlayed function
+document.querySelectorAll('.block').forEach((block, index) => block.addEventListener('click', () => blockPlayed(block, index)));
+// restart button
 document.querySelector('.restart').addEventListener('click', restart);
-
+//winning conditions in the array of the arrays
 const whoWin = [
   [0, 1, 2],        // [1 2 3]
   [3, 4, 5],        // [4 5 6] 
@@ -19,21 +21,31 @@ const whoWin = [
   [2, 4, 6]
 ];
 
-function blockPlayed(clickedBlock, clickedBlockIndex) {   
-  if (playGame) {                                       //if the game still active, you can put "" is 
+function blockPlayed(clickedBlock, clickedBlockIndex) {
+  if (playGame && isValidAction(clickedBlock)) {     //if the game still active, you can put value into the block
     console.log(clickedBlock, clickedBlockIndex)
-  board[clickedBlockIndex] = currentPlayer;
-  clickedBlock.innerHTML = currentPlayer;
-  results()
-  changePlayer()
+    board[clickedBlockIndex] = currentPlayer;
+    clickedBlock.innerHTML = currentPlayer; 
+    results()
+    if (playGame){
+      changePlayer()
+    }
   }
 }
 
-function changePlayer() {
-  currentPlayer = currentPlayer === "X" ? "O" : "X";
-  display.innerHTML = `It's ${currentPlayer}'s turn`;
-}
+const isValidAction = (block) => {  
+  if (block.innerText === 'X' || block.innerText === 'O') {
+    return false;
+  }
+  return true;
+};
 
+function changePlayer() {
+  currentPlayer = currentPlayer === "X" ? "O" : "X"; //if the current player O ... else X
+  display.innerHTML = `It's ${currentPlayer}'s turn`; 
+}
+// this function was borrowed from the tutorial (https://www.youtube.com/watch?v=B3pmT7Cpi24
+//I'm still working on it to translate 
 function results() {
   let winner = false;
   for (let i = 0; i <= 7; i++) {
