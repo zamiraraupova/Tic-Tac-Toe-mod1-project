@@ -10,6 +10,8 @@ startSound.src = "sounds/startgame.wav"
 
 const clickSound = new Audio("sounds/clickX.wav");
 const winSound = new Audio("sounds/win.wav");
+const clickSound2 = new Audio("sounds/clickO.wav")
+const tieSound = new Audio("sounds/tie.wav")
 
 //forEach - allows to grab all the blocks and be able to click on each one and it sends it to rhe blockPlayed function
 document.querySelectorAll('.block').forEach((block, index) => block.addEventListener('click', () => blockPlayed(block, index)));
@@ -32,16 +34,14 @@ function blockPlayed(clickedBlock, clickedBlockIndex) {
   if (playGame && isValidAction(clickedBlock)) {     //if the game still active, you can put value into the block
     console.log(clickedBlock, clickedBlockIndex)
     board[clickedBlockIndex] = currentPlayer;        // checks the board and gets the index of the array
-    clickSound.play();
     clickedBlock.innerHTML = currentPlayer;          // shows the current player X or O
     results()                                        // actual game function
-    if (playGame){                                   // if the game is active it changes the player
+    if (playGame) {                                   // if the game is active it changes the player
       changePlayer()
     }
   }
 }
-
-const isValidAction = (block) => {  
+const isValidAction = (block) => {
   if (block.innerText === 'X' || block.innerText === 'O') {
     return false;
   }
@@ -50,8 +50,14 @@ const isValidAction = (block) => {
 
 function changePlayer() {
   currentPlayer = currentPlayer === "X" ? "O" : "X"; //if the current player O ... else X
-  display.innerHTML = `It's ${currentPlayer}'s turn`; 
+  display.innerHTML = `It's ${currentPlayer}'s turn`;
+  if (currentPlayer == "X") {
+    clickSound.play()
+  } else {
+    clickSound2.play()
+  }
 }
+
 // this function was borrowed from the tutorial (https://www.youtube.com/watch?v=B3pmT7Cpi24
 //I'm still working on it to translate 
 function results() {
@@ -70,7 +76,6 @@ function results() {
       break
     }
   }
-
   if (winner) {
     console.log(currentPlayer)
     winSound.play();
@@ -78,9 +83,9 @@ function results() {
     playGame = false;
     return;
   }
-
   let tie = !board.includes(""); // if there is no empty spases and it is not a win, then it is a tie
   if (tie) {
+    tieSound.play();
     display.innerHTML = `It is a tie!`;
     playGame = false;
     return;
