@@ -4,6 +4,10 @@
 This is my first project in Per Scholas.
 
 It is a simple tic-tac-toe game for two players.
+
+This is a live site for Tic-Tac-Toe Game
+https://zamiraraupova.github.io/the_game/
+
 ## Authors
 
 - [@zamiraraupova](https://www.github.com/zamiraraupova)
@@ -29,4 +33,4 @@ This game is still needs some touch-ups, so the code would look DRY.
   
 ## Feedback
 
-Please, leave your Feedback 
+Please, leave your Feedback zamiraraupova13@gmail.com
