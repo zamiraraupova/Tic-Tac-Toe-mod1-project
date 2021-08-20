@@ -58,8 +58,7 @@ function changePlayer() {
   }
 }
 
-// this function was borrowed from the tutorial (https://www.youtube.com/watch?v=B3pmT7Cpi24
-//I'm still working on it to translate 
+// the main function. I used the tutorial (https://www.youtube.com/watch?v=B3pmT7Cpi24)
 function results() {
   let winner = false;
   for (let i = 0; i <= 7; i++) {
