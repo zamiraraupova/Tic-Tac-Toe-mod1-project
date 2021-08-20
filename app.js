@@ -5,6 +5,11 @@ let board = ["", "", "", "", "", "", "", "", ""]; // //the form of empty strings
 let playGame = true; // this is needed for pause if game ended //if game is still active
 let currentPlayer = "X"; // player X will start the game and to know whose turn is
 
+const startSound = new Audio();
+startSound.src = "sounds/startgame.wav"
+
+const clickSound = new Audio("sounds/clickX.wav");
+const winSound = new Audio("sounds/win.wav");
 
 //forEach - allows to grab all the blocks and be able to click on each one and it sends it to rhe blockPlayed function
 document.querySelectorAll('.block').forEach((block, index) => block.addEventListener('click', () => blockPlayed(block, index)));
@@ -27,7 +32,7 @@ function blockPlayed(clickedBlock, clickedBlockIndex) {
   if (playGame && isValidAction(clickedBlock)) {     //if the game still active, you can put value into the block
     console.log(clickedBlock, clickedBlockIndex)
     board[clickedBlockIndex] = currentPlayer;        // checks the board and gets the index of the array
-    
+    clickSound.play();
     clickedBlock.innerHTML = currentPlayer;          // shows the current player X or O
     results()                                        // actual game function
     if (playGame){                                   // if the game is active it changes the player
@@ -68,12 +73,13 @@ function results() {
 
   if (winner) {
     console.log(currentPlayer)
+    winSound.play();
     display.innerHTML = `Player ${currentPlayer} has won!`;
     playGame = false;
     return;
   }
 
-  let tie = !board.includes("");
+  let tie = !board.includes(""); // if there is no empty spases and it is not a win, then it is a tie
   if (tie) {
     display.innerHTML = `It is a tie!`;
     playGame = false;
@@ -81,7 +87,7 @@ function results() {
   }
 
 }
-
+// function to restart the game; sets up the game active, player X, and an empty board 
 function restart() {
   playGame = true;
   board = ["", "", "", "", "", "", "", "", ""];
