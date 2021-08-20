@@ -6,7 +6,11 @@ body {
 section {
   text-align: center;
 }
-
+.discription{
+  font-family: "Permanent Marker";
+  align-items: center;
+  color: #0f1a6f;
+}
 .title {
   font-size: 80px;
   color: #1b1d61;
@@ -24,7 +28,7 @@ section {
 }
 
 .block {
-  font-family: "Permanent Marker", cursive;
+  font-family: "Permanent Marker";
   width: 100px;
   height: 100px;
   box-shadow: 2px 2px 2px 2px #1b2426;
