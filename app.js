@@ -5,6 +5,7 @@ let board = ["", "", "", "", "", "", "", "", ""]; // //the form of empty strings
 let playGame = true; // this is needed for pause if game ended //if game is still active
 let currentPlayer = "X"; // player X will start the game and to know whose turn is
 
+
 //forEach - allows to grab all the blocks and be able to click on each one and it sends it to rhe blockPlayed function
 document.querySelectorAll('.block').forEach((block, index) => block.addEventListener('click', () => blockPlayed(block, index)));
 // restart button
@@ -21,13 +22,15 @@ const whoWin = [
   [2, 4, 6]
 ];
 
+//function allows to play the blocks 
 function blockPlayed(clickedBlock, clickedBlockIndex) {
   if (playGame && isValidAction(clickedBlock)) {     //if the game still active, you can put value into the block
     console.log(clickedBlock, clickedBlockIndex)
-    board[clickedBlockIndex] = currentPlayer;
-    clickedBlock.innerHTML = currentPlayer; 
-    results()
-    if (playGame){
+    board[clickedBlockIndex] = currentPlayer;        // checks the board and gets the index of the array
+    
+    clickedBlock.innerHTML = currentPlayer;          // shows the current player X or O
+    results()                                        // actual game function
+    if (playGame){                                   // if the game is active it changes the player
       changePlayer()
     }
   }
@@ -54,10 +57,10 @@ function results() {
     let b = board[win[1]];
     let c = board[win[2]];
 
-    if (a === '' || b === '' || c === '') {
+    if (a === '' || b === '' || c === '') {    //if winning coond empty -> game is active
       continue;
     }
-    if (a === b && b === c) {
+    if (a === b && b === c) {    //if winning coond met -> there is a winner and the game is stoped
       winner = true;
       break
     }
@@ -79,8 +82,6 @@ function results() {
 
 }
 
-
-
 function restart() {
   playGame = true;
   board = ["", "", "", "", "", "", "", "", ""];
@@ -88,51 +89,6 @@ function restart() {
   display.innerHTML = `It's ${currentPlayer}'s turn`;
   document.querySelectorAll('.block').forEach(block => block.innerHTML = "");
 }
-
-
-
-
-// const board = [
-//   ["","",""],
-//   ["","",""],
-//   ["","",""]
-// ]
-
-// function equals3(a,b,c){
-//   return (a==b && b==c && a != "");
-// }
-//     function winner(){
-//     let winner = null;
-// //rows
-//     for(let i = 0; i < 3; i++) {
-//         if(equals3(board[i][0],board[i][1],board[i][2])) {
-//            winner = board[i][0];     
-//         }
-//     }
-//     //colums
-//     for(let i = 0; i < 3; i++) {
-//         if(equals3(board[0][i],board[0][i],board[0][i])) {
-//            winner = board[0][i];     
-//         }
-//     }
-//     //dioganals
-//         if(equals3(board[0][0],board[1][1],board[2][2])) {
-//            winner = board[0][0];   //??  
-//         }
-
-//         if(equals3(board[0][2],board[1][1],board[2][0])) {
-//             winner = board[2][0];  // ??   
-//         }
-//     if (winner == null) {
-//         return "It is a tie";
-//       } 
-//       else{
-//           return winner
-//       } 
-// }
-
-
-
 
 
 
