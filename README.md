@@ -15,9 +15,8 @@ It is a simple tic-tac-toe game for two players.
 
   
 ## Screenshots
-
-![IMG_0342](https://user-images.githubusercontent.com/87194673/130240636-e3a4b1a4-a15d-4af7-a874-cd8710bc3cb7.jpeg)
-![IMG_0343](https://user-images.githubusercontent.com/87194673/130240645-0ce76dc9-4eed-4a9d-a800-a8c725d5cfdf.jpeg)
+![tictavtoe](https://user-images.githubusercontent.com/87194673/130241759-e64add0e-d10b-4d8b-a9b8-f48c43363293.jpeg)
+![board](https://user-images.githubusercontent.com/87194673/130241764-eeb7c3df-5eab-49fb-b73c-a2f78cd15108.jpeg)
 
   
 ## Appendix
